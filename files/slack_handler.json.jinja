@@ -1,0 +1,19 @@
+{
+  "handlers": {
+    "slack": {
+      "type": "pipe",
+      "command": "handler-slack.rb",
+      "severites": [
+        "critical",
+        "unknown"
+      ]
+    }
+  },
+  "slack": {
+    "webhook_url": "{{ salt['pillar.get']('slack_webhook') }}",
+    "dashboard": "{{ salt['pillar.get']('sensu_dash') }}",
+    "channel": "#{{ salt['pillar.get']('slack_channel') }}",
+    "bot_name": "{{ salt['pillar.get']('slack_bot') }}",
+    "icon_url": "{{ salt['pillar.get']('sensu_icon') }}"
+  }
+}

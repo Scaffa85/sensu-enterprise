@@ -1,0 +1,17 @@
+{% set fqdn =  salt['grains.get']('fqdn') -%}
+
+{
+  "sensu": [
+    {
+      "name": "{{ fqdn }}",
+      "host": "localhost",
+      "port": 4567,
+      "timeout": 10
+    }
+  ],
+  "dashboard": {
+    "host": "0.0.0.0",
+    "port": 3000,
+    "refresh": 10
+  }
+}

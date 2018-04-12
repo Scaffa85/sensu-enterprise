@@ -1,0 +1,20 @@
+{% set fqdn_ip4 = salt['grains.get']('fqdn_ip4') -%}
+{% set address_ip4 = salt['grains.get']('ip4_interfaces:eth0' -%}
+
+{
+  "client": {
+    "name": "{{ fqdn_ip4 }}",
+    "address": "{{ address_ip4  }}",
+    "subscriptions": [
+      "production",
+      "webserver",
+      "mysql"
+    ],
+    "socket": {
+      "bind": "127.0.0.1",
+      "port": 3030
+    }
+  }
+}
+
+

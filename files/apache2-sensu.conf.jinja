@@ -1,0 +1,30 @@
+{% set fqdn = salt['grains.get']('fqdn') -%}
+
+<Virtualhost *:80>
+
+    ServerName {{fqdn}}
+    Redirect / https://{{fqdn}}
+
+</Virtualhost>
+
+<Virtualhost *:443>
+
+    ServerName {{fqdn}}
+    ProxyRequests     Off
+    ProxyPreserveHost On
+    AllowEncodedSlashes NoDecode
+
+    <Proxy http://localhost:3000/*>
+      Order deny,allow
+      Allow from all
+    </Proxy>
+
+    ProxyPass         /  http://localhost:3000/ nocanon
+    ProxyPassReverse  /  http://localhost:3000/
+    ProxyPassReverse  /  http://{{fqdn}}/
+
+    SSLEngine On
+    SSLCertificateFile /etc/ssl/certs/wildcard_tvflab_co_uk.crt
+    SSLCertificateKeyFile /etc/ssl/private/wildcard_tvflab_co_uk.key
+
+</Virtualhost>

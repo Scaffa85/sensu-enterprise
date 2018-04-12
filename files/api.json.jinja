@@ -1,0 +1,9 @@
+{% set fqdn_ip4 = salt['grains.get']('fqdn_ip4') -%}
+
+{
+  "api": {
+    "host": "localhost",
+    "bind": "0.0.0.0",
+    "port": 4567
+  }
+}
