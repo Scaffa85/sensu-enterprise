@@ -184,7 +184,7 @@ mk_ssl_directory:
     - unless:
       - ls /etc/ssl/private/
 
-/etc/ssl/private/wildcard_tvflab_co_uk.key:
+/etc/ssl/private/wildcard.key:
   file.managed:
     - contents_pillar: wildcard_key
     - user: root
@@ -193,7 +193,7 @@ mk_ssl_directory:
     - require:
       - httpd
 
-/etc/ssl/certs/wildcard_tvflab_co_uk.crt:
+/etc/ssl/certs/wildcard.crt:
   file.managed:
     - contents_pillar: wildcard_cert
     - user: root
